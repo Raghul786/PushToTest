@@ -1,5 +1,5 @@
 pipeline {
-    agent { Node1 } // Run on Node1
+    agent { label 'Node1' } // Run on Node1
     stages {
         stage('Checkout Code') {
             steps {
