@@ -1,0 +1,22 @@
+pipeline {
+    // Run on Node2 for production deployments
+    agent { label 'Node2' }
+    stages {
+        stage('Checkout Code') {
+            steps {
+                git branch: 'master', // Change to your production branch name
+                url: 'https://github.com/Raghul786/PushToProd'
+            }
+        }
+        stage('Deploy to Production') {
+            steps {
+                script {
+                    def sourceDir = "${env.WORKSPACE}/scm"
+                    // Use chosen method to copy files to production server (e.g., scp, rsync)
+                    sh "scp -r ${/sourceDir} ubuntu@54.80.200.200:/home/ubuntu"
+                }
+            }
+        }
+    }
+}
+
